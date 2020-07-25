@@ -1,63 +1,56 @@
 var strArray = ["rock", "paper", "scissors"];
-        function computerPlay(){
-            var randIndex = Math.floor(Math.random() * 3);
-            var randStr = strArray[randIndex];
-            return randStr;
-        }
-        function playRound(playerSelection, computerSelection)
-        {
-            if(playerSelection==computerSelection)
-            {
-                return "tie";
-            }
-            if(playerSelection == "rock")
-            {
-                if(computerSelection == "paper")
-                {
-                    return "you lose :(";
-                }
-                return "you win!";
-            }
-            else if(playerSelection == "scissors")
-            {
-                if(computerSelection == "rock")
-                {
-                    return "you lose :(";
-                }
-                return "you win!";
-            }
-            else if(playerSelection == "paper")
-            {
-                if(computerSelection == "scissors")
-                {
-                    return "you lose :(";
-                }
-                return "you win!";
-            }
-            return "invalid arguments"
-        }
-        
-        function play(){
-            const playerSelection = prompt("Enter 'rock', 'paper', or 'scissors'.").toLowerCase();
-            const computerSelection = computerPlay();
-            return playRound(playerSelection, computerSelection)
-        }
-const btn = document.querySelector('#btn');
-console.log(btn);
-if(btn)
-{
-    btn.addEventListener('click', () => {
-        console.log(play());
-    });
-}
 // buttons is a node list. It looks and acts much like an array.
 const buttons = document.querySelectorAll('button');
+const clear = document.querySelector('#clear');
+function computerPlay(){
+    var randIndex = Math.floor(Math.random() * 3);
+    var randStr = strArray[randIndex];
+    return randStr;
+}
+function compSel(cSel, str)
+{
+    if(cSel == str) return "you lose :(";
+    return "you win!";
+    }
+    function playRound(pSel, cSel)
+    {
+        if(pSel==cSel)return "tie";
+        if(pSel == "rock")return  compSel(cSel, "paper");
+        else if(pSel == "scissors")return  compSel(cSel, "rock");
+        else if(pSel == "paper") return compSel(cSel, "scissors");
+        return "invalid arguments"
+    }
+        
+function play(){
+    const pSel = prompt("Enter 'rock', 'paper', or 'scissors'.").toLowerCase();
+    return playArg(pSel);
+}
+function playArg(selection)
+{
+    const cSel = computerPlay();
+    return playRound(selection, cSel)
+}
+const btn = document.querySelector('#btn');
+var result = document.querySelector('#result');
+if(btn)
+{
+    btn.addEventListener('dblclick', () => {
+        result.innerHTML += play()+"<br>";
+    });
+}
 
-// we use the .forEach method to iterate through each button
+if(clear)
+{
+    clear.addEventListener('click', () =>{
+        result.innerHTML = "";
+    });
+}
 buttons.forEach((button) => {
-
-  // and for each one we add a 'click' listener
-  button.addEventListener('click', () => {
-    alert(button.id);
+    const i = button.id;
+    if(i!='rock' && i!='paper' && i!='scissors') return;
+    // and for each one we add a 'click' listener
+    button.addEventListener('click', () => {
+        console.log(button.id);
+        result.innerHTML += playArg(button.id) + "<br>";
+    });
   });
-});
