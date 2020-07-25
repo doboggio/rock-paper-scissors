@@ -38,10 +38,26 @@ var strArray = ["rock", "paper", "scissors"];
         }
         
         function play(){
-            const playerSelection = prompt().toLowerCase();
+            const playerSelection = prompt("Enter 'rock', 'paper', or 'scissors'.").toLowerCase();
             const computerSelection = computerPlay();
             return playRound(playerSelection, computerSelection)
         }
+const btn = document.querySelector('#btn');
+console.log(btn);
+if(btn)
+{
+    btn.addEventListener('click', () => {
+        console.log(play());
+    });
+}
+// buttons is a node list. It looks and acts much like an array.
+const buttons = document.querySelectorAll('button');
 
-        
-        //console.log(play());
+// we use the .forEach method to iterate through each button
+buttons.forEach((button) => {
+
+  // and for each one we add a 'click' listener
+  button.addEventListener('click', () => {
+    alert(button.id);
+  });
+});
