@@ -1,1 +1,1 @@
-Rock Paper Scissors game as a part of The Odin Project.
+Javascript portion of The Odin Project.
