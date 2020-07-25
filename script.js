@@ -28,7 +28,7 @@ function play(){
 function playArg(selection)
 {
     const cSel = computerPlay();
-    return playRound(selection, cSel)
+    return "Player picked: " + selection +" - CPU picked: " + cSel + " -  "+ playRound(selection, cSel);
 }
 const btn = document.querySelector('#btn');
 var result = document.querySelector('#result');
